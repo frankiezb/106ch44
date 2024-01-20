@@ -1,0 +1,18 @@
+main{
+
+    display: flex;
+    height: calc( 100vh - 37px);
+    
+ }
+ 
+
+ 
+ #greensection {
+   background-color: red;
+   flex: 8; 
+ }
+ 
+ #orangesection {
+   background-color: blue;
+   flex: 6; 
+ }
