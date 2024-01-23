@@ -1,18 +1,19 @@
-main{
-
+main
+{
     display: flex;
-    height: calc( 100vh - 37px);
-    
- }
- 
+    height: calc(100vh - 37px);
+    flex-direction: row;
+   
+}
 
- 
- #greensection {
-   background-color: red;
-   flex: 8; 
- }
- 
- #orangesection {
-   background-color: blue;
-   flex: 6; 
- }
+#sectionA 
+{
+    background-color: aqua;
+    flex: 8;
+}
+
+#sectionB 
+{
+    background-color: red;    
+    flex: 6;
+}
