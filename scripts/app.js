@@ -1,34 +1,63 @@
 //global variables
 let iconImportant = false;
-function saveTask(){
+function saveTask() {
     console.log("Saving task");
-}
-function changeIcon(){
-    console.log("Changing icon");
-    const nonImportant = "fa-solid fa-phone";
-    const isImportant = "fa-solid fa-bars";
-    if (iconImportant) { 
+    //get the values
+    const title = $("#title").val();
+    const description = $("#description").val();
+    const color = $("#color").val();
+    const startDate = $("#startDate").val();
+    const status = $("#status").val();
+    const budget = $("#budget").val();
 
-    $("#iImportant").removeClass(isImportant)("#nonImportant").addClass(nonImportant);
-    iconImportant = false;
+    //build the object 
+    let taskToSave = new Task(title, description, color, startDate, status, budget);
+    console.log(taskToSave);
+    //save logic
+        $.ajax({
+            type: "POST",
+            url: "http://fsdiapi.azurewebsites.net/api/tasks/",
+            data: JSON.stringify(taskToSave),
+            contentType: "application/json",
+            success: function(res){
+              console.log(res);
+            },
+            error: function(error) {
+            console.log(error);
+            }
+          })
+}
+
+function changeIcon() {
+    console.log("Changing icon");
+    const nonImportant = "fa-solid fa-umbrella";
+    const isImportant = "fa-solid fa-mug-hot";
+    if (iconImportant) {
+        $("#iImportant").removeClass(isImportant).addClass(nonImportant);
+        iconImportant = false;
+    } else {
+        $("#iImportant").removeClass(nonImportant).addClass(isImportant);
+        iconImportant = true;
     }
-    else{
-    $("#iImportant").removeClass(nonImportant)("#nonImportant").addClass(isImportant);
-    iconImportant = true;
-    }
-    $("#iconImportant")
     //please try to restore the icon
 }
 
-function init(){
-console.log("this is the parent of everything")
-//load data
+function testRequest() {
+    $.ajax({
+        type: "GET",
+        url: "http://fsdiapi.azurewebsites.net"
+    });
 
-//hook events
-$("#btnSave").click(saveTask);
-$("#iImportant").click(changeIcon);
-//document.getelementbyid("btnSave").click(saveTask)
 }
 
+function init() {
+    console.log("This is the parent of everything");
+    //load data
+
+    //hook events
+    $("#btnSave").click(saveTask);
+    $("#iImportant").click(changeIcon);
+    //document.getElementById("btnSave").click(saveTask);
+}
 
 window.onload = init;
